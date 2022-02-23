@@ -1,37 +1,10 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import './style.css';
-import Sort from './sort';
+import Todos from './todo';
+import addTasks from './appendTodo';
 
-const todos = [
-  {
-    index: 1,
-    description: 'Learn JavaScript',
-    completed: true,
-  },
-  {
-    index: 2,
-    description: 'Learn React',
-    completed: false,
-  },
-  {
-    index: 3,
-    description: 'Learn Redux',
-    completed: false,
-  },
-];
+import todoInput from './postTodo';
 
-const listSorted = todos.sort(Sort);
-const ul = document.getElementById('todo-lists');
+document.getElementById('task-input').addEventListener('keypress', todoInput,false);
 
-window.onload = () => {
-  _.forEach(listSorted, (todo) => {
-    const li = document.createElement('li');
-    li.setAttribute('draggable', 'true');
-    const check = document.createElement('input');
-    check.setAttribute('type', 'checkbox');
-    li.appendChild(check);
-    li.innerHTML = `${todo.description}`;
-
-    ul.appendChild(li);
-  });
-};
+window.onload = addTasks(JSON.parse(localStorage.getItem('todos')));
